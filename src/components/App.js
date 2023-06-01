@@ -12,8 +12,18 @@ import LoaderContext from "../contexts/LoaderContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import { Routes, Route } from "react-router";
+import Login from "./Login";
+import Register from "./Register";
+import ProtectedRouteElement from "./ProtectedRoutes";
+import useLocalStorage from "../helpers/useLocalStorage";
+import { useNavigate } from "react-router-dom";
+import { checkTokenValidity } from "../Api/Auth";
 
 function App() {
+  const [token, setToken] = useLocalStorage("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [logInEmail, setLogInEmail] = useState("");
   const [popupProfileState, setStatePopupProfile] = useState(false);
   const [popupAvatarState, setStatePopupAvatar] = useState(false);
   const [selectedCardState, setStateCardState] = useState(false);
@@ -76,7 +86,6 @@ function App() {
 
   function handleSubmitUserInfo(e, name, description) {
     e.preventDefault();
-    console.log("tut");
     userService
       .updateUserInfo({
         name,
@@ -130,6 +139,26 @@ function App() {
       .catch((e) => console.error(e?.reason || e?.message));
   }, []);
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (token) {
+      const handleAuth = async (token) => {
+        const response = await checkTokenValidity(token);
+        setLogInEmail(response.data.email);
+        if (response) {
+          setIsLoggedIn(true);
+        }
+      };
+      handleAuth(token);
+    }
+  }, [token]);
+
   return (
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
@@ -149,16 +178,31 @@ function App() {
           onClose={setStateCardState}
         />
         <ImagePopup props={popupSelectedCardState} setStateSelectedCard={setStateSelectedCard} />
-        <Header />
+        <Header logInEmail={logInEmail} isLoggedIn={isLoggedIn} setToken={setToken} setLogInEmail={setLogInEmail} />
         <LoaderContext.Provider value={isLoading}>
           <CardsContext.Provider value={apiCardsState}>
-            <Main
-              onCardLike={(card) => handleCardLike(card)}
-              onCardDelete={(card) => handleCardDelete(card)}
-              props={setCallbacksState}
-              setters={callbacksState}
-              setStateSelectedCard={setStateSelectedCard}
-            />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRouteElement
+                    element={() => (
+                      <Main
+                        onCardLike={handleCardLike}
+                        onCardDelete={handleCardDelete}
+                        props={setCallbacksState}
+                        setters={callbacksState}
+                        setStateSelectedCard={setStateSelectedCard}
+                      />
+                    )}
+                    loggedIn={isLoggedIn}
+                  />
+                }
+              />
+
+              <Route path="/sign-up" element={<Register />} />
+              <Route path="/sign-in" element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />} />
+            </Routes>
           </CardsContext.Provider>
         </LoaderContext.Provider>
       </CurrentUserContext.Provider>
