@@ -131,13 +131,15 @@ function App() {
       .catch(console.error);
   }
   useEffect(() => {
-    Promise.all([userService.getCurrentUser(), cardService.getAllCards()])
-      .then(([userInfoAnswer, cardsAnswer]) => {
-        setCurrentUser({ ...userInfoAnswer });
-        setApiCardsState([...cardsAnswer]);
-      })
-      .catch((e) => console.error(e?.reason || e?.message));
-  }, []);
+    if (isLoggedIn) {
+      Promise.all([userService.getCurrentUser(), cardService.getAllCards()])
+        .then(([userInfoAnswer, cardsAnswer]) => {
+          setCurrentUser({ ...userInfoAnswer });
+          setApiCardsState([...cardsAnswer]);
+        })
+        .catch((e) => console.error(e?.reason || e?.message));
+    }
+  }, [isLoggedIn]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -146,18 +148,18 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    if (token) {
-      const handleAuth = async (token) => {
+  if (isLoggedIn) {
+    const handleAuth = async (token) => {
+      try {
         const response = await checkTokenValidity(token);
         setLogInEmail(response.data.email);
-        if (response) {
-          setIsLoggedIn(true);
-        }
-      };
-      handleAuth(token);
-    }
-  }, [token]);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error(error?.reason || error?.message);
+      }
+    };
+    handleAuth(token);
+  }
 
   return (
     <div className="root">
@@ -178,7 +180,13 @@ function App() {
           onClose={setStateCardState}
         />
         <ImagePopup props={popupSelectedCardState} setStateSelectedCard={setStateSelectedCard} />
-        <Header logInEmail={logInEmail} isLoggedIn={isLoggedIn} setToken={setToken} setLogInEmail={setLogInEmail} />
+        <Header
+          logInEmail={logInEmail}
+          isLoggedIn={isLoggedIn}
+          setToken={setToken}
+          setLogInEmail={setLogInEmail}
+          setIsLoggedIn={setIsLoggedIn}
+        />
         <LoaderContext.Provider value={isLoading}>
           <CardsContext.Provider value={apiCardsState}>
             <Routes>

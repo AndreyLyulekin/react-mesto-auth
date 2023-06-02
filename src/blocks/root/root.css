@@ -38,6 +38,13 @@
   gap: 24px;
 }
 
+@media screen and (max-width: 640px) {
+  .header__userContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .header__user-email {
   color: white;
   background-color: transparent;

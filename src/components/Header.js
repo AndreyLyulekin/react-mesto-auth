@@ -3,7 +3,7 @@ import logo from "../images/logo.svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-function Header({ logInEmail, isLoggedIn, setLogInEmail, setToken }) {
+function Header({ logInEmail, isLoggedIn, setLogInEmail, setToken, setIsLoggedIn }) {
   const location = useLocation();
   const [textAuth, setTextAuth] = useState("Войти");
   const [linkRoute, setLinkRoute] = useState("/sign-up");
@@ -11,7 +11,9 @@ function Header({ logInEmail, isLoggedIn, setLogInEmail, setToken }) {
   const signOut = () => {
     setLogInEmail("");
     setToken("");
-    setTextAuth("Войти");
+    setTextAuth("Регистрация");
+    setLinkRoute("/sign-up");
+    setIsLoggedIn(false);
   };
 
   useEffect(() => {

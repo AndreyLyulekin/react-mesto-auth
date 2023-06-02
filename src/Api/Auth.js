@@ -9,20 +9,18 @@ export const register = ({ password, email }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ password, email }),
-  })
-    .then((response) => {
-      const status = response.status;
-      if (response.ok) {
-        return response.json().then((data) => {
-          return { data, status };
-        });
-      } else {
-        return response.json().then((data) => {
-          return { data, status };
-        });
-      }
-    })
-    .catch((e) => console.error(e?.reason || e?.message));
+  }).then((response) => {
+    const status = response.status;
+    if (response.ok) {
+      return response.json().then((data) => {
+        return { data, status };
+      });
+    } else {
+      return response.json().then((data) => {
+        return { data, status };
+      });
+    }
+  });
 };
 
 //Авторизация пользователя:
@@ -34,20 +32,18 @@ export const authorize = ({ password, email }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ password, email }),
-  })
-    .then((response) => {
-      const status = response.status;
-      if (response.ok) {
-        return response.json().then((data) => {
-          return { data, status };
-        });
-      } else {
-        return response.json().then((data) => {
-          return { data, status };
-        });
-      }
-    })
-    .catch((e) => console.error(e?.reason || e?.message));
+  }).then((response) => {
+    const status = response.status;
+    if (response.ok) {
+      return response.json().then((data) => {
+        return { data, status };
+      });
+    } else {
+      return response.json().then((data) => {
+        return { data, status };
+      });
+    }
+  });
 };
 
 //Для проверки токена и получения email:
@@ -66,6 +62,5 @@ export const checkTokenValidity = (token) => {
       }
       return Promise.reject(`Ошибка ${res.status}: ${res.statusText}`);
     })
-    .then((data) => data)
-    .catch((e) => console.error(e?.reason || e?.message));
+    .then((data) => data);
 };
