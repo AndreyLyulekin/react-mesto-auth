@@ -4,7 +4,7 @@ import CardsContext from "../contexts/CardsContext";
 import React from "react";
 
 function Main(props) {
-  const callbackSetState = props.props;
+  const callbackSetState = props.setCallbacksState;
   const { setStatePopupProfile, setStatePopupAvatar, setStateCardState } = props.setters;
 
   const currentUser = React.useContext(CurrentUserContext);

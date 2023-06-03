@@ -148,18 +148,16 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  if (isLoggedIn) {
-    const handleAuth = async (token) => {
-      try {
-        const response = await checkTokenValidity(token);
-        setLogInEmail(response.data.email);
-        setIsLoggedIn(true);
-      } catch (error) {
-        console.error(error?.reason || error?.message);
-      }
-    };
-    handleAuth(token);
-  }
+  const handleAuth = async (token) => {
+    try {
+      const response = await checkTokenValidity(token);
+      setLogInEmail(response.data.email);
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error(error?.reason || error?.message);
+    }
+  };
+  handleAuth(token);
 
   return (
     <div className="root">
@@ -198,7 +196,7 @@ function App() {
                       <Main
                         onCardLike={handleCardLike}
                         onCardDelete={handleCardDelete}
-                        props={setCallbacksState}
+                        setCallbacksState={setCallbacksState}
                         setters={callbacksState}
                         setStateSelectedCard={setStateSelectedCard}
                       />

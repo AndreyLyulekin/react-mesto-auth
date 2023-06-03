@@ -12,7 +12,6 @@ export default function Login({ setToken, setIsLoggedIn }) {
     try {
       const handleAuth = async (password, email) => {
         const response = await authorize(password, email);
-        console.log(response);
         if (response.status === 200) {
           setIsOpenedPopup(true);
           setToken(response.data.token);
