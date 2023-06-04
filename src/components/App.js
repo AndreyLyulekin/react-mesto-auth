@@ -148,16 +148,18 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  const handleAuth = async (token) => {
-    try {
-      const response = await checkTokenValidity(token);
-      setLogInEmail(response.data.email);
-      setIsLoggedIn(true);
-    } catch (error) {
-      console.error(error?.reason || error?.message);
-    }
-  };
-  handleAuth(token);
+  useEffect(() => {
+    const handleAuth = async (token) => {
+      try {
+        const response = await checkTokenValidity(token);
+        setLogInEmail(response.data.email);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error(error?.reason || error?.message);
+      }
+    };
+    handleAuth(token);
+  }, []);
 
   return (
     <div className="root">
