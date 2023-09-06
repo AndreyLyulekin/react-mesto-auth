@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/react-mesto-auth/static/css/main.8dcf5ba8.css",
+    "main.js": "/react-mesto-auth/static/js/main.a1a49b4b.js",
+    "static/js/787.5530211c.chunk.js": "/react-mesto-auth/static/js/787.5530211c.chunk.js",
+    "static/media/Inter-Medium.woff": "/react-mesto-auth/static/media/Inter-Medium.eec0ea57721daa33c7a2.woff",
+    "static/media/Inter-Black.woff": "/react-mesto-auth/static/media/Inter-Black.7bb6234314ccc72c942a.woff",
+    "static/media/Inter-Regular.woff": "/react-mesto-auth/static/media/Inter-Regular.e148c4a1158f8cee8285.woff",
+    "static/media/Inter-Medium.woff2": "/react-mesto-auth/static/media/Inter-Medium.d0a58d956cf2f4cf078f.woff2",
+    "static/media/Inter-Black.woff2": "/react-mesto-auth/static/media/Inter-Black.768169b1912340d378ac.woff2",
+    "static/media/Inter-Regular.woff2": "/react-mesto-auth/static/media/Inter-Regular.26a30a5f1103393aac70.woff2",
+    "static/media/logo.svg": "/react-mesto-auth/static/media/logo.abb64ac93f95638a25980723dd788f00.svg",
+    "static/media/like.svg": "/react-mesto-auth/static/media/like.87ed371465c7a6a1cd01.svg",
+    "index.html": "/react-mesto-auth/index.html",
+    "static/media/trash.svg": "/react-mesto-auth/static/media/trash.823b0cf1b0b7e9cb7cad.svg",
+    "static/media/like-active.svg": "/react-mesto-auth/static/media/like-active.e787eeb70bb65b7b453a.svg",
+    "static/media/Edit-Button.svg": "/react-mesto-auth/static/media/Edit-Button.8667ac4a523e8fc42e59.svg",
+    "static/media/Close-Icon.svg": "/react-mesto-auth/static/media/Close-Icon.2ceb783afbab75916ddc.svg",
+    "static/media/Profile-Button.svg": "/react-mesto-auth/static/media/Profile-Button.d86bb2edc2f6eadb96b7.svg",
+    "main.8dcf5ba8.css.map": "/react-mesto-auth/static/css/main.8dcf5ba8.css.map",
+    "main.a1a49b4b.js.map": "/react-mesto-auth/static/js/main.a1a49b4b.js.map",
+    "787.5530211c.chunk.js.map": "/react-mesto-auth/static/js/787.5530211c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8dcf5ba8.css",
+    "static/js/main.a1a49b4b.js"
+  ]
+}
